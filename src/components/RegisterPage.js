@@ -18,7 +18,7 @@ function RegisterPage() {
       alert(message); // Display a success message
 
       // Send email verification and redirect to VerifyOTPPage
-      await axios.post('https://ecom-server-y427.onrender.com/sendMail', { email }); // Send email verification
+      await axios.post('https://ecom-server-y427.onrender.com/api/sendMail', { email }); // Send email verification
       history(`/verifyotp?email=${email}`); // Redirect to VerifyOTPPage
     } catch (error) {
       // Handle registration error
