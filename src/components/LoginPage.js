@@ -21,7 +21,7 @@ function LoginPage({ onLogin }) {
       onLogin();
       history('/');
     } catch (error) {
-      if(!error.response.created){
+      if(error.response.created === true){
         alert('Dont have account')
         history('/register');
         return
