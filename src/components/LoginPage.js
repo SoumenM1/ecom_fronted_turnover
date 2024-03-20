@@ -14,7 +14,7 @@ function LoginPage({ onLogin }) {
         return
       }
 
-      const response = await axios.post('https://ecom-server-vbfv.onrender.com/api/login', { email, password });
+      const response = await axios.post('https://ecom-server-y427.onrender.com/api/login', { email, password });
       const { token } = response.data;
       localStorage.setItem('token', token);
       // Redirect the user to the homepage or any other authenticated page
@@ -27,7 +27,7 @@ function LoginPage({ onLogin }) {
         return
       }
       if(!error.response.emailVerified){
-        await axios.post('https://ecom-server-vbfv.onrender.com/api/sendMail', { email }); // Send email verification
+        await axios.post('https://ecom-server-y427.onrender.com/api/sendMail', { email }); // Send email verification
         history(`/verifyotp?email=${email}`);
         return
       }

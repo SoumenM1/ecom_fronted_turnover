@@ -17,7 +17,7 @@ function HomePage() {
 
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(`https://ecom-server-vbfv.onrender.com/api/getCategory?page=${currentPage}`, {
+        const response = await axios.get(`https://ecom-server-y427.onrender.com/api/getCategory?page=${currentPage}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -42,7 +42,7 @@ function HomePage() {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.patch('http://localhost:4000/api/category/isSelect', {
+      await axios.patch('https://ecom-server-y427.onrender.com/api/category/isSelect', {
         categoryId: categoryId,
         isSelected: !selectedCategories.includes(categoryId),
       }, {
