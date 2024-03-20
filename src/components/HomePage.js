@@ -17,7 +17,7 @@ function HomePage() {
 
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/getCategory?page=${currentPage}`, {
+        const response = await axios.get(`https://ecom-server-vbfv.onrender.com/api/getCategory?page=${currentPage}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

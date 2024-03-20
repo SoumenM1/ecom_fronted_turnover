@@ -18,7 +18,7 @@ function VerifyOTPPage() {
   // Function to handle OTP verification
   const handleVerifyOTP = async () => {
     try {
-       await axios.post('http://localhost:4000/api/verifyMail', { email, otp });
+       await axios.post('https://ecom-server-vbfv.onrender.com/api/verifyMail', { email, otp });
         // Handle successful OTP verification
         alert('OTP verified successfully!');
         // Redirect to the login page
@@ -35,7 +35,7 @@ function VerifyOTPPage() {
   const handleResendOTP = async () => {
     try {
       setResendDisabled(true); // Disable resend button to prevent multiple clicks
-      const response = await axios.post('http://localhost:4000/api/sendMail', { email });
+      const response = await axios.post('https://ecom-server-vbfv.onrender.com/api/sendMail', { email });
       if (response.status === 200) {
         alert('OTP resent successfully!');
         // Set a timeout for 2 minutes (120000 milliseconds)

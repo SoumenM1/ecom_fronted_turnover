@@ -10,7 +10,7 @@ function RegisterPage() {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post('http://localhost:4000/api/register', { name, email, password });
+      const response = await axios.post('https://ecom-server-vbfv.onrender.com/api/register', { name, email, password });
       // Handle successful registration
       // Assuming the API sends back a message after successful registration
       console.log(response)
@@ -18,7 +18,7 @@ function RegisterPage() {
       alert(message); // Display a success message
 
       // Send email verification and redirect to VerifyOTPPage
-      await axios.post('http://localhost:4000/api/sendMail', { email }); // Send email verification
+      await axios.post('https://ecom-server-vbfv.onrender.com/sendMail', { email }); // Send email verification
       history(`/verifyotp?email=${email}`); // Redirect to VerifyOTPPage
     } catch (error) {
       // Handle registration error
