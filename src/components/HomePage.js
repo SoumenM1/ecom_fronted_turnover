@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function HomePage() {
@@ -6,12 +7,12 @@ function HomePage() {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-
+  let history = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
       // If no token is found, redirect to login page
-      window.location.href = '/login';
+      history('/login')
       return;
     }
 
@@ -31,7 +32,7 @@ function HomePage() {
     };
 
     fetchCategories(); // Initial fetch
-  }, [currentPage]); // Fetch whenever currentPage changes
+  }, [currentPage, history]); // Fetch whenever currentPage changes
 
   const handleCheckboxChange = async (category) => {
     const categoryId = category.id;
@@ -63,7 +64,7 @@ function HomePage() {
   const handleLogout = () => {
     localStorage.removeItem('token');
     // Redirect to the login page or any other desired route
-    window.location.href = '/login';
+    history('/login')
   };
 
   return (
