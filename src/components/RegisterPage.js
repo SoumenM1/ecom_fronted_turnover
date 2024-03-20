@@ -25,7 +25,7 @@ function RegisterPage() {
       if (error.response && error.response.data.error) {
         alert(error.response.data.error); // Display registration error message
       } else {
-        alert('user is already exit plz login'); // Generic error message
+        alert('User already exists. Please login.'); // Generic error message
       }
     }
   };
