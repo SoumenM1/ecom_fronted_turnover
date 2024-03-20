@@ -6,6 +6,7 @@ function RegisterPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const history = useNavigate();
 
   const handleRegister = async () => {
@@ -40,7 +41,13 @@ function RegisterPage() {
       <div style={{ backgroundColor: '#f0f0f0', padding: '20px', borderRadius: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} style={{ marginBottom: '10px', width: '300px', padding: '10px' }} />
         <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} style={{ marginBottom: '10px', width: '300px', padding: '10px' }} />
-        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} style={{ marginBottom: '10px', width: '300px', padding: '10px' }} />
+        <input type={showPassword ? 'text' : 'password'} placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} style={{ marginBottom: '10px', width: '300px', padding: '10px' }} />
+        <span
+            onClick={() => setShowPassword(!showPassword)}
+            style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer' }}
+          >
+            {showPassword ? 'Hide' : 'Show'}
+          </span>
         <button onClick={handleRegister} style={{ backgroundColor: '#007bff', color: '#fff', border: 'none', padding: '10px 20px', borderRadius: '5px', width: '300px', marginBottom: '10px' }}>Register</button>
         <button onClick={handleLogin} style={{ backgroundColor: '#28a745', color: '#fff', border: 'none', padding: '10px 20px', borderRadius: '5px', width: '300px' }}>Login</button>
       </div>
