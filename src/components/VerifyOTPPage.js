@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 function VerifyOTPPage() {
-  const [otp, setOTP] = useState('');
+  const [otp, setOTP] = useState(['', '', '', '', '', '', '', '']); // Array to hold OTP digits
   const location = useLocation();
   const [email, setEmail] = useState('');
   const [resendDisabled, setResendDisabled] = useState(false);
@@ -18,14 +18,13 @@ function VerifyOTPPage() {
   // Function to handle OTP verification
   const handleVerifyOTP = async () => {
     try {
-       await axios.post('https://ecom-server-vbfv.onrender.com/api/verifyMail', { email, otp });
-        // Handle successful OTP verification
-        alert('OTP verified successfully!');
-        // Redirect to the login page
-        history('/login');
-    
+      const otpString = otp.join(''); // Convert array of OTP digits to string
+      await axios.post('https://ecom-server-vbfv.onrender.com/api/verifyMail', { email, otp: otpString });
+      // Handle successful OTP verification
+      alert('OTP verified successfully!');
+      // Redirect to the login page
+      history('/login');
     } catch (error) {
-
       // Handle OTP verification error
       alert('OTP verification failed. Please try again.');
     }
@@ -54,17 +53,37 @@ function VerifyOTPPage() {
     }
   };
 
+  // Function to handle input change for OTP digits
+  const handleOTPChange = (index, value) => {
+    const updatedOTP = [...otp];
+    updatedOTP[index] = value;
+    setOTP(updatedOTP);
+  };
+
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
       <div>
         <p>Show email id: {email}</p>
-        <input
-          type="text"
-          placeholder="Enter OTP"
-          value={otp}
-          onChange={(e) => setOTP(e.target.value)}
-          style={{ width: '300px', height: '40px', fontSize: '16px', marginBottom: '20px' }}
-        />
+        <div style={{ display: 'flex', marginBottom: '20px' }}>
+          {otp.map((digit, index) => (
+            <input
+              key={index}
+              type="text"
+              maxLength="1"
+              value={digit}
+              onChange={(e) => handleOTPChange(index, e.target.value)}
+              style={{
+                width: '40px',
+                height: '40px',
+                fontSize: '16px',
+                textAlign: 'center',
+                marginRight: '10px',
+                border: '1px solid #ccc',
+                borderRadius: '5px',
+              }}
+            />
+          ))}
+        </div>
         <button
           onClick={handleVerifyOTP}
           style={{
@@ -75,7 +94,7 @@ function VerifyOTPPage() {
             borderRadius: '5px',
             cursor: 'pointer',
             fontSize: '16px',
-            marginRight: '10px'
+            marginRight: '10px',
           }}
         >
           Verify OTP
@@ -89,7 +108,7 @@ function VerifyOTPPage() {
             padding: '10px 20px',
             borderRadius: '5px',
             cursor: 'pointer',
-            fontSize: '16px'
+            fontSize: '16px',
           }}
           disabled={resendDisabled} // Disable resend button if it's already clicked
         >
