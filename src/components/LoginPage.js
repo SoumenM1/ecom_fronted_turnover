@@ -21,11 +21,11 @@ function LoginPage({ onLogin }) {
       onLogin();
       history('/');
     } catch (error) {
-      if(error.response.status === 401){
-        alert('Dont have account')
-        history('/register');
-        return
-      }
+      // if(error.response.status === 401){
+      //   alert('Dont have account')
+      //   history('/register');
+      //   return
+      // }
       if(!error.response.emailVerified){
         await axios.post('https://ecom-server-vbfv.onrender.com/api/sendMail', { email }); // Send email verification
         history(`/verifyotp?email=${email}`);

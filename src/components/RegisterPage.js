@@ -13,7 +13,7 @@ function RegisterPage() {
       const response = await axios.post('https://ecom-server-vbfv.onrender.com/api/register', { name, email, password });
       // Handle successful registration
       // Assuming the API sends back a message after successful registration
-      console.log(response)
+      // console.log(response)
       const message = response.data.msg;
       alert(message); // Display a success message
 
